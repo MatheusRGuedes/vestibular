@@ -27,11 +27,11 @@ export class GenericService<T> {
     /**
      * Return only one existing register.
      */
-    findOne(id: number) {
+    findOne(id: string) {
         return this.http.get<T>( `${this.API_URL}/${id}` );
     }
 
-    private update(id: number, record: Object) {
+    private update(id: string, record: Object) {
         return this.http.put( `${this.API_URL}/${id}` , record);
     }
 
@@ -44,7 +44,7 @@ export class GenericService<T> {
      * @param id Object identificator.
      * @param record New object to update.
      */
-    save(id :number, record: Object) {
+    save(id :string, record: Object) {
         if (id) {
           return this.update(id, record);
         } else {
@@ -52,7 +52,7 @@ export class GenericService<T> {
         }
     }
     
-    delete(id :number) {
+    delete(id :string) {
         return this.http.delete( `${this.API_URL}/${id}` );
     }
 }
