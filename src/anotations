@@ -1,0 +1,2 @@
+- mudar o diretorio pages para module
+- adicionar as bibliotecas principais lá (FormsModule, etc) comuns as páginas

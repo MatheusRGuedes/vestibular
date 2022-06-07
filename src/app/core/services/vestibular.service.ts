@@ -16,19 +16,23 @@ export class VestibularService {
     this.genericService = new GenericService(http, this.API_URL);
   }
 
-  todos() {
-    return this.genericService.findAll();
+  getAll() {
+    return this.genericService.getAll();
   }
 
-  encontrar(id :string) {
-    return this.genericService.findOne(id);
+  getOne(id :string) {
+    return this.genericService.getOne(id);
   }
 
-  gravar(id :string, vestibular :IVestibular) {
-    return this.genericService.save(id, vestibular);
+  save(vestibular :any) {
+    return this.genericService.create(vestibular);
   }
 
-  deletar(id :string) {
+  update(id :string, vestibular :any) {
+    return this.genericService.update(id, vestibular);
+  }
+
+  delete(id :string) {
     return this.genericService.delete(id);
   }
 }

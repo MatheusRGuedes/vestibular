@@ -17,41 +17,22 @@ export class GenericService<T> {
         }
     }
 
-    /**
-     * Return all registers.
-     */
-    findAll() {
+    getAll() {
         return this.http.get<T[]>( `${this.API_URL}`, this.options);
     }
 
-    /**
-     * Return only one existing register.
-     */
-    findOne(id: string) {
+    getOne(id: string) {
         return this.http.get<T>( `${this.API_URL}/${id}` );
     }
 
-    private update(id: string, record: Object) {
+    create(record: Object) {
+        return this.http.post( `${this.API_URL}` , record);
+    }
+
+    update(id: string, record: Object) {
         return this.http.put( `${this.API_URL}/${id}` , record);
     }
 
-    private insert(record: Object) {
-        return this.http.post( `${this.API_URL}` , record);
-    }
-    
-    /**
-     * Method for insert or update.
-     * @param id Object identificator.
-     * @param record New object to update.
-     */
-    save(id :string, record: Object) {
-        if (id) {
-          return this.update(id, record);
-        } else {
-          return this.insert(record);
-        }
-    }
-    
     delete(id :string) {
         return this.http.delete( `${this.API_URL}/${id}` );
     }
