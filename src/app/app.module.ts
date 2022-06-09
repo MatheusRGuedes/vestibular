@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
+import { VestibularModule } from './pages/vestibular/vestibular.module';
 
 import { AppComponent } from './app.component';
-import { VestibularModule } from './pages/vestibular/vestibular.module';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import { VestibularModule } from './pages/vestibular/vestibular.module';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     VestibularModule
   ],
   providers: [],
