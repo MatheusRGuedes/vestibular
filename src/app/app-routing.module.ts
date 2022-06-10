@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { VestibularNewComponent } from "./pages/vestibular/vestibular-new/vestibular-new.component";
+import { VestibularListComponent } from "./pages/vestibular/vestibular-list/vestibular-list.component";
 
 // Qualquer rota nova na aplicação, adicionar acima da vazia ('')
 const appRoutes :Routes = [
@@ -9,8 +9,8 @@ const appRoutes :Routes = [
         loadChildren: () => import("./pages/vestibular/vestibular.module").then(m => m.VestibularModule)
     },
     
-    { path: '', component: VestibularNewComponent },
-    { path: '**', component: VestibularNewComponent }
+    { path: '', component: VestibularListComponent },
+    { path: '**', component: VestibularListComponent }
 ]
 
 @NgModule({
