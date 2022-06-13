@@ -36,4 +36,16 @@ export class VestibularListComponent implements OnInit {
     console.log(vestibular);
     this.router.navigate([`vestibulares/editar/${vestibular.id}`]);
   }
+
+  excluir(id :string) {
+    if (confirm("Deseja excluir o vestibular ?")) {
+      this.service.delete(id).subscribe(() => {
+        this.carregarLista();
+        alert("Vestibular excluído com sucesso!");
+        console.log(`Vestibular excluído com id: ${id}`);
+      }, (error) => {
+        console.log(error);
+      })
+    }
+  }
 }
