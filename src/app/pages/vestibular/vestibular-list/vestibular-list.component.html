@@ -1,4 +1,6 @@
-<h4>Listagem de Vestibulares</h4>
+<h5>Listagem de Vestibulares</h5>
+
+<a class="btn btn-primary btn-sm my-4" routerLink="/vestibulares/novo">Novo Vestibular</a>
 
 <table class="table">
     <thead>
@@ -15,7 +17,7 @@
             <td>{{ obj.dataInicio | date:'dd/MM/YYYY' }}</td>
             <td>{{ obj.dataFim | date:'dd/MM/YYYY' }}</td>
             <td>
-                <button class="btn btn-warning btn-sm" >Editar</button>
+                <button class="btn btn-warning btn-sm" (click)="editar(obj)">Editar</button>
                 &nbsp;
                 <button class="btn btn-secondary btn-sm">Adicionar Sala</button>
             </td>

@@ -5,7 +5,7 @@ import { VestibularListComponent } from "./pages/vestibular/vestibular-list/vest
 // Qualquer rota nova na aplicação, adicionar acima da vazia ('')
 const appRoutes :Routes = [
     { 
-        path: "vestibular", 
+        path: "vestibulares", 
         loadChildren: () => import("./pages/vestibular/vestibular.module").then(m => m.VestibularModule)
     },
     

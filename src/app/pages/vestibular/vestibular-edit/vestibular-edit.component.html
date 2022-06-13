@@ -1,6 +1,6 @@
-<h5>Novo Vestibular</h5>
+<h5>Editar Vestibular</h5>
 
-<a class="btn btn-primary btn-sm my-4" routerLink="/vestibulares">Listar Vestibulares</a>
+<a class="btn btn-primary btn-sm my-4" routerLink="/vestibulares">Lista vestibulares</a>
 
 <form action="" [formGroup]="vestibularForm">
     <div class="d-flex mb-3">
@@ -31,5 +31,5 @@
     {{ vestibularForm.controls['dataInicio'].dirty | json }}
     -->
 
-    <button type="submit" class="btn btn-primary btn-sm" (click)="salvar()">Salvar</button>
+    <button type="submit" class="btn btn-primary btn-sm" (click)="editar()">Salvar</button>
 </form>

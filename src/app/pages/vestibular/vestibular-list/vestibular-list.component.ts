@@ -31,4 +31,9 @@ export class VestibularListComponent implements OnInit {
         console.error(error);
       })
   }
+
+  editar(vestibular :IVestibular) {
+    console.log(vestibular);
+    this.router.navigate([`vestibulares/editar/${vestibular.id}`]);
+  }
 }

@@ -1,16 +1,20 @@
+//Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VestibularRoutingModule } from './vestibular-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from 'src/app/core/core.module';
 
+//Components
 import { VestibularNewComponent } from './vestibular-new/vestibular-new.component';
 import { VestibularListComponent } from './vestibular-list/vestibular-list.component';
+import { VestibularEditComponent } from './vestibular-edit/vestibular-edit.component';
 
 @NgModule({
   declarations: [
     VestibularNewComponent,
-    VestibularListComponent
+    VestibularListComponent,
+    VestibularEditComponent
   ],
   imports: [
     CommonModule,

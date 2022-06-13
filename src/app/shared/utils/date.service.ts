@@ -16,4 +16,17 @@ export class DateService {
     let ano = data.substring(0, 4);
     return new Date(mes +'-'+ dia +'-'+ ano);
   }
+
+  static dateToString(data :Date) :string {
+    if (data) {
+      let month = (data.getMonth() + 1).toString();
+      if (month.length == 1) month = "0"+month;
+
+      let day = data.getDate().toString();
+      if (day.length == 1) day = "0"+day;
+      
+      return data.getFullYear() +"-"+ month +"-"+ day;
+    }
+    return "";
+  }
 }
