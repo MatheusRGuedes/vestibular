@@ -10,7 +10,11 @@ const appRoutes :Routes = [
     },
     {
         path: "vestibulares/:idVestibular/salas",
-        loadChildren: () => import("./pages/sala/sala.module").then(s => s.SalaModule)
+        loadChildren: () => import("./pages/sala/sala.module").then(m => m.SalaModule)
+    },
+    {
+        path: "vestibulares/:idVestibular/cursos",
+        loadChildren: () => import("./pages/curso/curso.module").then(m => m.CursoModule)
     },
     
     { path: '', component: VestibularListComponent },
