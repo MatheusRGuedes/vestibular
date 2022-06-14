@@ -8,6 +8,10 @@ const appRoutes :Routes = [
         path: "vestibulares", 
         loadChildren: () => import("./pages/vestibular/vestibular.module").then(m => m.VestibularModule)
     },
+    {
+        path: "vestibulares/:idVestibular/salas",
+        loadChildren: () => import("./pages/sala/sala.module").then(s => s.SalaModule)
+    },
     
     { path: '', component: VestibularListComponent },
     { path: '**', component: VestibularListComponent }

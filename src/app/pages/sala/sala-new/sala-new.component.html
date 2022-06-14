@@ -1,0 +1,35 @@
+<h5>Nova Sala</h5>
+
+<form action="" [formGroup]="salaForm">
+    <div class="row mb-3">
+        <div class="col-sm-4">
+            <label for="identificador" class="form-label">Identificador</label>
+            <input type="text" class="form-control" id="identificador" formControlName="identificador" placeholder="Ex.: A1">
+
+            <div *ngIf="campoInvalido('identificador')" class="containerError">
+                <span>Campo é obrigatório.</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <label for="bloco" class="form-label">Bloco</label>
+            <input type="text" class="form-control" id="bloco" formControlName="bloco">
+
+            <div *ngIf="campoInvalido('bloco')" class="containerError">
+                <span>Campo obrigatório.</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <label for="capacidade" class="form-label">Capacidade</label>
+            <input type="number" min="0" class="form-control" id="capacidade" formControlName="capacidade">
+
+            <div *ngIf="campoInvalido('capacidade')" class="containerError">
+                <span *ngIf="capacidade.errors?.required">Campo obrigatório.</span>
+                <span *ngIf="capacidade.errors?.max">Deve ser inferior a 5.</span>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary btn-sm" (click)="salvar()">Salvar</button>
+</form>
