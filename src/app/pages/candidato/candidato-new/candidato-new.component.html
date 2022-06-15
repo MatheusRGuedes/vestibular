@@ -1,0 +1,62 @@
+<h5>Novo Candidato</h5>
+
+<!--<a class="btn btn-primary btn-sm my-4" routerLink="/cursos">Listar Cursos</a> -->
+
+<form action="" [formGroup]="candidatoForm">
+    <div class="row mb-3">
+        <div class="col-sm-4">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" formControlName="nome">
+
+            <div *ngIf="campoInvalido('nome')" class="containerError">
+                <span>Campo obrigatório.</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <label for="dataNascimento" class="form-label">Data Nascimento</label>
+            <input type="text" class="form-control" id="dataNascimento" formControlName="dataNascimento">
+
+            <div *ngIf="campoInvalido('dataNascimento')" class="containerError">
+                <span>Campo obrigatório.</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <label for="cpf" class="form-label">Cpf</label>
+            <input type="text" class="form-control" id="cpf" formControlName="cpf">
+
+            <div *ngIf="campoInvalido('cpf')" class="containerError">
+                <span>Campo obrigatório.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-4">
+            <label for="idVestibular" class="form-label">Vestibular</label>
+            <select class="form-select" #vestibular formControlName="idVestibular" (change)="recuperarCursos(vestibular)">
+                <option value="">Selecione...</option>
+                <option *ngFor="let obj of listaVestibulares" value="{{obj.valor}}">{{obj.descricao}}</option>
+            </select>
+
+            <div *ngIf="campoInvalido('idVestibular')" class="containerError">
+                <span>Campo obrigatório.</span>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <label for="idCurso" class="form-label">Curso</label>
+            <select class="form-select" formControlName="idCurso">
+                <option selected value="">Selecione...</option>
+                <option *ngFor="let obj of listaCursos" value="{{obj.valor}}">{{obj.descricao}}</option>
+            </select>
+
+            <div *ngIf="campoInvalido('idCurso')" class="containerError">
+                <span>Campo obrigatório.</span>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary btn-sm" (click)="salvar()">Salvar</button>
+</form>
