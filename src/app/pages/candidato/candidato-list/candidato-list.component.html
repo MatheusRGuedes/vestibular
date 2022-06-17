@@ -1,5 +1,25 @@
 <h5>Lista candidatos</h5>
 
-<table>
-    
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Nome</th>
+            <th scope="col">Data Nascimento</th>
+            <th scope="col">Cpf</th>
+            <th scope="col">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let obj of listaCandidatos; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ obj.nome }}</td>
+            <td>{{ obj.dataNascimento | date:'dd/MM/YYYY' }}</td>
+            <td>
+                <button class="btn btn-warning btn-sm" (click)="editar(obj)">Editar</button>
+                &nbsp;
+                <button class="btn btn-danger btn-sm" (click)="excluir(obj.id)">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
 </table>

@@ -18,13 +18,13 @@ export class CandidatoNewComponent implements OnInit {
   // Variáveis
   candidatoForm :FormGroup;
   listaVestibulares :ComboGenerica[] = [
-    { valor: '1', descricao: 'vest1' },
-    { valor: '2', descricao: 'vest2' },
-    { valor: '3', descricao: 'vest3' }
+    //{ valor: '1', descricao: 'vest1' },
+   // { valor: '2', descricao: 'vest2' },
+   // { valor: '3', descricao: 'vest3' }
   ];
   listaCursos :ComboGenerica[] = [
-    { valor: '1', descricao: 'curso1' },
-    { valor: '2', descricao: 'curso2' }
+  //  { valor: '1', descricao: 'curso1' },
+  //  { valor: '2', descricao: 'curso2' }
   ];
 
   constructor(

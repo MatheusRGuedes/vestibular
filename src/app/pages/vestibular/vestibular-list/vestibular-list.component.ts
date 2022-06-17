@@ -12,8 +12,8 @@ export class VestibularListComponent implements OnInit {
 
   // Variáveis
   listaVestibulares :IVestibular[] = [
-    { id: "1", dataInicio: new Date("2021-12-10"), dataFim: new Date() },
-    { id: "2", dataInicio: new Date("2019-10-03"), dataFim: new Date("2020-02-13") }
+   // { id: "1", dataInicio: new Date("2021-12-10"), dataFim: new Date() },
+   // { id: "2", dataInicio: new Date("2019-10-03"), dataFim: new Date("2020-02-13") }
   ];
 
   constructor(private service :VestibularService,
