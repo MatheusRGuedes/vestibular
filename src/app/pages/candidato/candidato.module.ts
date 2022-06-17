@@ -4,10 +4,12 @@ import { CandidatoRoutingModule } from './candidato-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from 'src/app/core/core.module';
 import { CandidatoNewComponent } from './candidato-new/candidato-new.component';
+import { CandidatoListComponent } from './candidato-list/candidato-list.component';
 
 @NgModule({
   declarations: [
-    CandidatoNewComponent
+    CandidatoNewComponent,
+    CandidatoListComponent
   ],
   imports: [
     CommonModule,
