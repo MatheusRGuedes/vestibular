@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 import { CursoService } from 'src/app/core/services/curso.service';
 import { VestibularService } from 'src/app/core/services/vestibular.service';
+import { CandidatoService } from 'src/app/core/services/candidato.service';
 import { DateService } from 'src/app/shared/utils/date.service';
 
 import { ComboGenerica } from 'src/app/shared/models/combo-generica.model';
@@ -29,7 +30,8 @@ export class CandidatoNewComponent implements OnInit {
   constructor(
     private fb :FormBuilder,
     private vestibularService :VestibularService,
-    private cursoService :CursoService
+    private cursoService :CursoService,
+    private candidatoService :CandidatoService
     ) {
     this.candidatoForm = fb.group({
       "nome": fb.control('', Validators.required),
@@ -95,16 +97,24 @@ export class CandidatoNewComponent implements OnInit {
   salvar() {
     if (!this.candidatoForm.valid) {
       this.markAllAsDirty(this.candidatoForm);
-    } else {
-      const obj = {
-        "nome": this.nome,
-        "dataNascimento": this.dataNascimento,
-        "cpf": this.cpf
-      }
-
-      //gravar
+      return false;
     }
+    const idVestibular = this.idVestibular.value;
+    const idCurso = this.idCurso.value;
+    const obj = {
+      "nome": this.nome.value,
+      "dataNascimento": DateService.stringToDate(this.dataNascimento.value),
+      "cpf": this.cpf.value
+    }
+
+    this.candidatoService.create(idVestibular, idCurso, obj)
+      .subscribe((success) => {
+        alert("Candidato criado com sucesso!");
+      }, (error) => {
+        console.log(error);
+    })
   }
+
 
   // GETTERS DO FORMULÁRIO
   get nome() :FormControl {

@@ -15,7 +15,7 @@
 
         <div class="col-sm-4">
             <label for="dataNascimento" class="form-label">Data Nascimento</label>
-            <input type="text" class="form-control" id="dataNascimento" formControlName="dataNascimento">
+            <input type="date" class="form-control" id="dataNascimento" formControlName="dataNascimento">
 
             <div *ngIf="campoInvalido('dataNascimento')" class="containerError">
                 <span>Campo obrigatório.</span>
@@ -35,7 +35,7 @@
     <div class="row mb-3">
         <div class="col-sm-4">
             <label for="idVestibular" class="form-label">Vestibular</label>
-            <select class="form-select" #vestibular formControlName="idVestibular" (change)="recuperarCursos(vestibular)">
+            <select class="form-select" #vestibular formControlName="idVestibular"> <!--(change)="recuperarCursos(vestibular)"-->
                 <option value="">Selecione...</option>
                 <option *ngFor="let obj of listaVestibulares" value="{{obj.valor}}">{{obj.descricao}}</option>
             </select>
