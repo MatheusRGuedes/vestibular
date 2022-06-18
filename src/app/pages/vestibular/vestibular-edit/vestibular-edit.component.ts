@@ -12,17 +12,17 @@ import { DateService } from 'src/app/shared/utils/date.service';
 })
 export class VestibularEditComponent implements OnInit {
 
-  //variáveis
-  vestibularForm :FormGroup;
+  // variáveis
+  vestibularForm: FormGroup;
 
   constructor(
-    private fb :FormBuilder,
-    private activatedRoute :ActivatedRoute,
-    private vestibularService :VestibularService
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private vestibularService: VestibularService
   ) {
     this.vestibularForm = fb.group({
-      dataInicio: fb.control("", Validators.required),
-      dataFim: fb.control("", Validators.required)
+      dataInicio: fb.control('', Validators.required),
+      dataFim: fb.control('', Validators.required)
     });
   }
 
@@ -31,7 +31,7 @@ export class VestibularEditComponent implements OnInit {
   }
 
   recuperarVestibular() {
-    const id = this.activatedRoute.snapshot.paramMap.get("id");
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
     console.log(id);
 
     this.vestibularService.getOne(id)
@@ -42,43 +42,43 @@ export class VestibularEditComponent implements OnInit {
         });
       }, (error) => {
         console.error(error);
-    })
+    });
   }
 
-  campoInvalido(campo :string) :boolean {
+  campoInvalido(campo: string): boolean {
     return (
       !this.vestibularForm.get(campo).valid && this.vestibularForm.get(campo).dirty
-    )
+    );
   }
 
   // Marca todos os campos como inválidos
-  markAllAsDirty(form : FormGroup) {
-    //console.log("recurção!");
+  markAllAsDirty(form: FormGroup) {
+    // console.log("recurção!");
     Object.keys(form.controls).forEach(campo => {
-      //console.log(campo);
+      // console.log(campo);
       const control = form.get(campo);
-      
+
       if (control instanceof FormGroup) {
         this.markAllAsDirty(control);
       } else {
         control.markAsDirty();
       }
-    })
+    });
   }
 
   editar() {
     if (!this.vestibularForm.valid) {
       this.markAllAsDirty(this.vestibularForm);
     } else {
-      const id = this.activatedRoute.snapshot.paramMap.get("id");
-      
+      const id = this.activatedRoute.snapshot.paramMap.get('id');
+
       const obj = {
-        "dataInicio": DateService.stringToDate(this.dataInicio.value), 
-        "dataFim": DateService.stringToDate(this.dataFim.value) 
+        "dataInicio": DateService.stringToDate(this.dataInicio.value),
+        "dataFim": DateService.stringToDate(this.dataFim.value)
       };
 
       this.vestibularService.update(id, obj).subscribe((success) => {
-        alert("Vestibular Atualizado com sucesso!");
+        alert('Vestibular Atualizado com sucesso!');
       }, (error) => {
         console.error(error);
       });
@@ -86,10 +86,10 @@ export class VestibularEditComponent implements OnInit {
   }
 
   // Getters do formulário
-  get dataInicio() :FormControl {
+  get dataInicio(): FormControl {
     return this.vestibularForm.get('dataInicio') as FormControl;
   }
-  get dataFim() :FormControl {
+  get dataFim(): FormControl {
     return this.vestibularForm.get('dataFim') as FormControl;
   }
 }

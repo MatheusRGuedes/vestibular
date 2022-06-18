@@ -11,13 +11,10 @@ import { IVestibular } from 'src/app/shared/models/vestibular.model';
 export class VestibularListComponent implements OnInit {
 
   // Variáveis
-  listaVestibulares :IVestibular[] = [
-    { id: "1", dataInicio: new Date("2021-12-10"), dataFim: new Date() },
-    { id: "2", dataInicio: new Date("2019-10-03"), dataFim: new Date("2020-02-13") }
-  ];
+  listaVestibulares: Object;
 
-  constructor(private service :VestibularService,
-    private router :Router) { }
+  constructor(private service: VestibularService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.carregarLista();
@@ -29,23 +26,24 @@ export class VestibularListComponent implements OnInit {
         this.listaVestibulares = vestibulares;
       }, (error) => {
         console.error(error);
-      })
+      });
   }
 
-  editar(vestibular :IVestibular) {
+  editar(vestibular: IVestibular) {
     console.log(vestibular);
     this.router.navigate([`vestibulares/editar/${vestibular.id}`]);
   }
 
-  excluir(id :string) {
-    if (confirm("Deseja excluir o vestibular ?")) {
+  excluir(id: string) {
+    if (confirm('Deseja excluir o vestibular ?')) {
       this.service.delete(id).subscribe(() => {
         this.carregarLista();
-        alert("Vestibular excluído com sucesso!");
+        alert('Vestibular excluído com sucesso!');
         console.log(`Vestibular excluído com id: ${id}`);
       }, (error) => {
         console.log(error);
-      })
+      });
     }
   }
+
 }

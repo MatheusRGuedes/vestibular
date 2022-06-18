@@ -1,20 +1,20 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-/* 
+/*
     Classe genérica para serviço de requisição
 
     --> É feito 2 requisições a solicitação real e uma permissão da primeira
 */
 export class GenericService<T> {
 
-    private options : {} = {};
-    
-    constructor(protected http: HttpClient, private API_URL :string) {
+    private options: {} = {};
+
+    constructor(protected http: HttpClient, private API_URL: string) {
         this.options = {
             headers: new HttpHeaders({
-                'Access-Control-Allow-Origin': "" //definir url da api
+                'Access-Control-Allow-Origin': '', // definir url da api
             })
-        }
+        };
     }
 
     getAll() {
@@ -33,7 +33,7 @@ export class GenericService<T> {
         return this.http.put( `${this.API_URL}/${id}` , record);
     }
 
-    delete(id :string) {
+    delete(id: string) {
         return this.http.delete( `${this.API_URL}/${id}` );
     }
 }

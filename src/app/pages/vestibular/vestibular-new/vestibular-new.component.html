@@ -1,35 +1,33 @@
-<h5>Novo Vestibular</h5>
 
-<a class="btn btn-primary btn-sm my-4" routerLink="/vestibulares">Listar Vestibulares</a>
+<div class="container">
 
-<form action="" [formGroup]="vestibularForm">
-    <div class="d-flex mb-3">
-        <div class="row">
-            <div class="col-sm-6">
-                <label for="dataInicio" class="form-label">Data Início</label>
-                <input type="date" class="form-control" id="dataInicio" formControlName="dataInicio">
+  <nav class="navbar">
+    <h5>Novo Vestibular</h5>
+    <a class="btn btn-primary btn-sm my-4" routerLink="/vestibulares">Listar Vestibulares</a>
+  </nav>
 
-                <div *ngIf="campoInvalido('dataInicio')" class="containerError">
-                    <span>Campo obrigatório.</span>
-                </div>
-            </div>
+  <form action="" [formGroup]="vestibularForm">
+    <div class="mb-4">
+      <div class="row">
+        <div class="col-2">
+          <label for="dataInicio" class="form-label">Data Início</label>
+          <input type="date" class="form-control" id="dataInicio" formControlName="dataInicio">
 
-            <div class="col-sm-6">
-                <label for="dataFim" class="form-label">Data Fim</label>
-                <input type="date" class="form-control" id="dataFim" formControlName="dataFim">
-
-                <div *ngIf="campoInvalido('dataFim')" class="containerError">
-                    <span>Campo obrigatório.</span>
-                </div>
-            </div>
+          <div *ngIf="campoInvalido('dataInicio')" class="containerError">
+            <span>Campo obrigatório.</span>
+          </div>
         </div>
+
+        <div class="col-2">
+          <label for="dataFim" class="form-label">Data Fim</label>
+          <input type="date" class="form-control" id="dataFim" formControlName="dataFim">
+
+          <div *ngIf="campoInvalido('dataFim')" class="containerError">
+            <span>Campo obrigatório.</span>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <!--Data Início: 
-    {{ vestibularForm.controls['dataInicio'].valid | json }}
-    | 
-    {{ vestibularForm.controls['dataInicio'].dirty | json }}
-    -->
-
     <button type="submit" class="btn btn-primary btn-sm" (click)="salvar()">Salvar</button>
-</form>
+  </form>
+</div>
