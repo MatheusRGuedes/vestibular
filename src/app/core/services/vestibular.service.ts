@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IVestibular } from 'src/app/shared/models/vestibular.model';
-import { environment } from 'src/environments/environment';
 import { GenericService } from './generic-service';
+import {Observable} from "rxjs";
+import {IVestibulares} from "../../shared/models/vestibulares.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class VestibularService {
     this.genericService = new GenericService(http, this.API_URL);
   }
 
-  getAll() {
-    return this.genericService.getAll();
+  getAll(): Observable<IVestibulares> {
+    return this.http.get<IVestibulares>( `${this.API_URL}`);
   }
 
   getOne(id: string) {

@@ -11,7 +11,7 @@ import { IVestibular } from 'src/app/shared/models/vestibular.model';
 export class VestibularListComponent implements OnInit {
 
   // Variáveis
-  listaVestibulares: Object;
+  listaVestibulares: IVestibular[];
 
   constructor(private service: VestibularService,
               private router: Router) { }
@@ -22,8 +22,9 @@ export class VestibularListComponent implements OnInit {
 
   carregarLista() {
     return this.service.getAll().subscribe(
-      (vestibulares) => {
-        this.listaVestibulares = vestibulares;
+      (response) => {
+        this.listaVestibulares = response.vestibulares;
+        console.log('Vestibulares --->', response);
       }, (error) => {
         console.error(error);
       });

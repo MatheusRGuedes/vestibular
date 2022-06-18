@@ -1,4 +1,4 @@
 export interface ICurso {
-    id? :string,
-    nome :string;
+    id?: string;
+    nome: string;
 }
