@@ -21,19 +21,19 @@ export class VestibularService {
     return this.http.get<IVestibulares>( `${this.API_URL}`);
   }
 
-  getOne(id: string) {
-    return this.genericService.getOne(id);
+  getOne(vestibularUUID: string): Observable<IVestibular> {
+    return this.http.get<IVestibular>( `${this.API_URL}/${vestibularUUID}`);
   }
 
   save(vestibular: any) {
-    return this.genericService.create(vestibular);
+    return this.http.post( `${this.API_URL}` , vestibular);
   }
 
   update(id: string, vestibular: any) {
     return this.genericService.update(id, vestibular);
   }
 
-  delete(id: string) {
-    return this.genericService.delete(id);
+  delete(vestibularUUID: string): Observable<IVestibulares> {
+    return this.http.delete<IVestibulares>( `${this.API_URL}/${vestibularUUID}` );
   }
 }

@@ -30,7 +30,7 @@ export class GenericService<T> {
     }
 
     update(id: string, record: Object) {
-        return this.http.put( `${this.API_URL}/${id}` , record);
+        return this.http.patch( `${this.API_URL}/${id}` , record);
     }
 
     delete(id: string) {

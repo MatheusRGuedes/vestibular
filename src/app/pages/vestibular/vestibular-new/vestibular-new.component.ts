@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { VestibularService } from 'src/app/core/services/vestibular.service';
 import { DateService } from 'src/app/shared/utils/date.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'vestibular-new',
@@ -14,7 +15,8 @@ export class VestibularNewComponent implements OnInit {
   vestibularForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private vestibularService: VestibularService) {
+              private vestibularService: VestibularService,
+              private router: Router) {
     this.vestibularForm = fb.group({
       dataInicio: fb.control('', Validators.required),
       dataFim: fb.control('', Validators.required)
@@ -40,18 +42,15 @@ export class VestibularNewComponent implements OnInit {
       };
 
       this.vestibularService.save(obj).subscribe((success) => {
-        alert('Vestibular Gravado com sucesso!');
+        this.router.navigate([`vestibulares`]);
       }, (error) => {
         console.error(error);
       });
     }
   }
 
-  // Marca todos os campos como inválidos
   markAllAsDirty(form: FormGroup) {
-    // console.log("recurção!");
     Object.keys(form.controls).forEach(campo => {
-      // console.log(campo);
       const control = form.get(campo);
 
       if (control instanceof FormGroup) {
@@ -62,7 +61,6 @@ export class VestibularNewComponent implements OnInit {
     });
   }
 
-  // Getters do formulário
   get dataInicio(): FormControl {
     return this.vestibularForm.get('dataInicio') as FormControl;
   }

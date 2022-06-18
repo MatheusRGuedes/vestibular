@@ -32,17 +32,16 @@ export class VestibularListComponent implements OnInit {
 
   editar(vestibular: IVestibular) {
     console.log(vestibular);
-    this.router.navigate([`vestibulares/editar/${vestibular.id}`]);
+    this.router.navigate([`vestibulares/editar/${vestibular.vestibularUUID}`]);
   }
 
-  excluir(id: string) {
+  excluir(vestibularUUID: string) {
     if (confirm('Deseja excluir o vestibular ?')) {
-      this.service.delete(id).subscribe(() => {
-        this.carregarLista();
-        alert('Vestibular excluído com sucesso!');
-        console.log(`Vestibular excluído com id: ${id}`);
+      this.service.delete(vestibularUUID).subscribe((response) => {
+        this.listaVestibulares = response.vestibulares;
+        console.log('Vestibulares --->', response);
       }, (error) => {
-        console.log(error);
+        console.error(error);
       });
     }
   }

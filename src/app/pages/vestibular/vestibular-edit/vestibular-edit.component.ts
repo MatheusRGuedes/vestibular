@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { VestibularService } from 'src/app/core/services/vestibular.service';
 import { DateService } from 'src/app/shared/utils/date.service';
@@ -18,7 +18,8 @@ export class VestibularEditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private vestibularService: VestibularService
+    private vestibularService: VestibularService,
+    private router: Router
   ) {
     this.vestibularForm = fb.group({
       dataInicio: fb.control('', Validators.required),
@@ -35,10 +36,11 @@ export class VestibularEditComponent implements OnInit {
     console.log(id);
 
     this.vestibularService.getOne(id)
-      .subscribe((vestibular) => {
+      .subscribe((response) => {
+        console.log('Vestibular recuperado --->', response);
         this.vestibularForm.patchValue({
-          "dataInicio": DateService.dateToString(vestibular.dataInicio),
-          "dataFim": DateService.dateToString(vestibular.dataFim)
+          dataInicio: DateService.dateToString(response.dataInicio),
+          dataFim: DateService.dateToString(response.dataFim)
         });
       }, (error) => {
         console.error(error);
@@ -51,11 +53,8 @@ export class VestibularEditComponent implements OnInit {
     );
   }
 
-  // Marca todos os campos como inválidos
   markAllAsDirty(form: FormGroup) {
-    // console.log("recurção!");
     Object.keys(form.controls).forEach(campo => {
-      // console.log(campo);
       const control = form.get(campo);
 
       if (control instanceof FormGroup) {
@@ -78,14 +77,13 @@ export class VestibularEditComponent implements OnInit {
       };
 
       this.vestibularService.update(id, obj).subscribe((success) => {
-        alert('Vestibular Atualizado com sucesso!');
+        this.router.navigate([`vestibulares`]);
       }, (error) => {
         console.error(error);
       });
     }
   }
 
-  // Getters do formulário
   get dataInicio(): FormControl {
     return this.vestibularForm.get('dataInicio') as FormControl;
   }

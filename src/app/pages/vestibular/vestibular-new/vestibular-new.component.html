@@ -3,31 +3,35 @@
 
   <nav class="navbar">
     <h5>Novo Vestibular</h5>
-    <a class="btn btn-primary btn-sm my-4" routerLink="/vestibulares">Listar Vestibulares</a>
   </nav>
 
   <form action="" [formGroup]="vestibularForm">
-    <div class="mb-4">
-      <div class="row">
-        <div class="col-2">
-          <label for="dataInicio" class="form-label">Data Início</label>
-          <input type="date" class="form-control" id="dataInicio" formControlName="dataInicio">
+    <div class="row mb-4">
+      <div class="col-2">
+        <label for="dataInicio" class="form-label">Data Início</label>
+        <input type="date" class="form-control" id="dataInicio" formControlName="dataInicio">
 
-          <div *ngIf="campoInvalido('dataInicio')" class="containerError">
-            <span>Campo obrigatório.</span>
-          </div>
+        <div *ngIf="campoInvalido('dataInicio')" class="containerError">
+          <span>Campo obrigatório.</span>
         </div>
+      </div>
 
-        <div class="col-2">
-          <label for="dataFim" class="form-label">Data Fim</label>
-          <input type="date" class="form-control" id="dataFim" formControlName="dataFim">
+      <div class="col-2">
+        <label for="dataFim" class="form-label">Data Fim</label>
+        <input type="date" class="form-control" id="dataFim" formControlName="dataFim">
 
-          <div *ngIf="campoInvalido('dataFim')" class="containerError">
-            <span>Campo obrigatório.</span>
-          </div>
+        <div *ngIf="campoInvalido('dataFim')" class="containerError">
+          <span>Campo obrigatório.</span>
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-sm" (click)="salvar()">Salvar</button>
+    <div class="row">
+      <div class="col-2">
+        <a class="btn btn-primary btn-sm" routerLink="/vestibulares"><< Voltar</a>
+      </div>
+      <div class="col-2 d-flex flex-row-reverse">
+        <button type="submit" class="btn btn-success btn-sm" (click)="salvar()">Salvar</button>
+      </div>
+    </div>
   </form>
 </div>

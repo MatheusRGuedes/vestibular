@@ -3,7 +3,7 @@
 
   <nav class="navbar">
     <h5>Vestibulares</h5>
-    <a class="btn btn-primary btn-sm my-4" routerLink="/vestibulares/novo">Novo Vestibular</a>
+    <a class="btn btn-success btn-sm my-4" routerLink="/vestibulares/novo">Novo Vestibular</a>
   </nav>
 
   <table class="table table-striped">
@@ -23,11 +23,11 @@
       <td>
         <button class="btn btn-warning btn-sm" (click)="editar(obj)">Editar</button>
         &nbsp;
-        <button class="btn btn-danger btn-sm" (click)="excluir(obj.id)">Excluir</button>
+        <button class="btn btn-danger btn-sm" (click)="excluir(obj.vestibularUUID)">Excluir</button>
         &nbsp;
-        <a class="btn btn-secondary btn-sm" routerLink="{{obj.id}}/salas/novo">Adicionar Sala</a>
+        <a class="btn btn-secondary btn-sm" routerLink="{{obj.vestibularUUID}}/salas/novo">Adicionar Sala</a>
         &nbsp;
-        <a class="btn btn-secondary btn-sm" routerLink="{{obj.id}}/cursos/novo">Adicionar Curso</a>
+        <a class="btn btn-secondary btn-sm" routerLink="{{obj.vestibularUUID}}/cursos/novo">Adicionar Curso</a>
       </td>
     </tr>
     </tbody>

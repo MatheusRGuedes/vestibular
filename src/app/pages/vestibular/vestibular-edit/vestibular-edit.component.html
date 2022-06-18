@@ -1,35 +1,38 @@
-<h5>Editar Vestibular</h5>
 
-<a class="btn btn-primary btn-sm my-4" routerLink="/vestibulares">Lista vestibulares</a>
+<div class="container">
+  <nav class="navbar">
+    <h5>Editar Vestibular</h5>
+  </nav>
 
-<form action="" [formGroup]="vestibularForm">
+  <form action="" [formGroup]="vestibularForm">
     <div class="d-flex mb-3">
-        <div class="row">
-            <div class="col-sm-6">
-                <label for="dataInicio" class="form-label">Data Início</label>
-                <input type="date" class="form-control" id="dataInicio" formControlName="dataInicio">
+      <div class="row">
+        <div class="col-sm-6">
+          <label for="dataInicio" class="form-label">Data Início</label>
+          <input type="date" class="form-control" id="dataInicio" formControlName="dataInicio">
 
-                <div *ngIf="campoInvalido('dataInicio')" class="containerError">
-                    <span>Campo obrigatório.</span>
-                </div>
-            </div>
-
-            <div class="col-sm-6">
-                <label for="dataFim" class="form-label">Data Fim</label>
-                <input type="date" class="form-control" id="dataFim" formControlName="dataFim">
-
-                <div *ngIf="campoInvalido('dataFim')" class="containerError">
-                    <span>Campo obrigatório.</span>
-                </div>
-            </div>
+          <div *ngIf="campoInvalido('dataInicio')" class="containerError">
+            <span>Campo obrigatório.</span>
+          </div>
         </div>
+
+        <div class="col-sm-6">
+          <label for="dataFim" class="form-label">Data Fim</label>
+          <input type="date" class="form-control" id="dataFim" formControlName="dataFim">
+
+          <div *ngIf="campoInvalido('dataFim')" class="containerError">
+            <span>Campo obrigatório.</span>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <!--Data Início: 
-    {{ vestibularForm.controls['dataInicio'].valid | json }}
-    | 
-    {{ vestibularForm.controls['dataInicio'].dirty | json }}
-    -->
-
-    <button type="submit" class="btn btn-primary btn-sm" (click)="editar()">Salvar</button>
-</form>
+    <div class="row">
+      <div class="col-2">
+        <a class="btn btn-primary btn-sm" routerLink="/vestibulares"><< Voltar</a>
+      </div>
+      <div class="col-2 d-flex flex-row-reverse">
+        <button type="submit" class="btn btn-success btn-sm" (click)="editar()">Salvar</button>
+      </div>
+    </div>
+  </form>
+</div>

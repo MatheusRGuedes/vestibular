@@ -3,7 +3,7 @@ import { ICurso } from './curso.model';
 import { ISala } from './sala.model';
 
 export interface IVestibular {
-    id: string;
+    vestibularUUID: string;
     dataInicio: Date;
     dataFim: Date;
     cursos?: ICurso[];
