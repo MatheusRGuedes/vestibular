@@ -25,11 +25,12 @@
         &nbsp;
         <button class="btn btn-danger btn-sm" (click)="excluir(obj.vestibularUUID)">Excluir</button>
         &nbsp;
-        <a class="btn btn-secondary btn-sm" routerLink="{{obj.vestibularUUID}}/salas/novo">Adicionar Sala</a>
+        <a class="btn btn-secondary btn-sm" routerLink="/vestibulares/{{obj.vestibularUUID}}/salas">Salas</a>
         &nbsp;
-        <a class="btn btn-secondary btn-sm" routerLink="{{obj.vestibularUUID}}/cursos/novo">Adicionar Curso</a>
+        <a class="btn btn-secondary btn-sm" routerLink="/vestibulares/{{obj.vestibularUUID}}/cursos/novo">Adicionar Curso</a>
       </td>
     </tr>
     </tbody>
   </table>
+
 </div>

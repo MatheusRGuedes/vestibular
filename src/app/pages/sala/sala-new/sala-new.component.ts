@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { SalaService } from 'src/app/core/services/sala.service';
 import { ISala } from 'src/app/shared/models/sala.model';
 
@@ -11,69 +11,64 @@ import { ISala } from 'src/app/shared/models/sala.model';
 })
 export class SalaNewComponent implements OnInit {
 
-  // Variáveis
-  salaForm :FormGroup;
+  vestibularUUID: string;
+  salaForm: FormGroup;
 
-  constructor(
-    private fb :FormBuilder,
-    private router :ActivatedRoute,
-    private salaService :SalaService) 
-    {
-    this.salaForm = fb.group({
-      "identificador": fb.control('', Validators.required),
-      "bloco": fb.control('', Validators.required),
-      "capacidade": fb.control('', [
-        Validators.required, Validators.max(5)
-      ])
+  constructor(private fb: FormBuilder,
+              private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private salaService: SalaService) {
+
+      this.vestibularUUID = this.activatedRoute.snapshot.paramMap.get('idVestibular');
+
+      this.salaForm = fb.group({
+        identificador: fb.control('', Validators.required),
+        bloco: fb.control('', Validators.required),
+        capacidade: fb.control('', Validators.required)
     });
   }
 
   ngOnInit(): void {
   }
 
-  campoInvalido(campo :string) :boolean {
+  campoInvalido(campo: string): boolean {
     return (
       !this.salaForm.get(campo).valid && this.salaForm.get(campo).dirty
-    )
+    );
   }
 
-  // Marca todos os campos como inválidos
-  markAllAsDirty(form : FormGroup) {
-    //console.log("recurção!");
+  markAllAsDirty(form: FormGroup) {
     Object.keys(form.controls).forEach(campo => {
-      //console.log(campo);
       const control = form.get(campo);
-      
       if (control instanceof FormGroup) {
         this.markAllAsDirty(control);
       } else {
         control.markAsDirty();
       }
-    })
+    });
   }
 
   salvar() {
-    const idVestibular = this.router.snapshot.paramMap.get("idVestibular");
-    if (idVestibular) {
+    if (this.vestibularUUID) {
 
       if (this.salaForm.invalid) {
         this.markAllAsDirty(this.salaForm);
         return false;
       }
 
-      const obj :ISala = {
-        "identificador": this.identificador.value,
-        "bloco": this.bloco.value,
-        "capacidade": Number.parseInt(this.capacidade.value)
+      const obj: ISala = {
+        identificador: this.identificador.value,
+        bloco: this.bloco.value,
+        capacidade: Number.parseInt(this.capacidade.value)
       };
 
-      this.salaService.create(idVestibular, obj).subscribe((success) => {
-          alert("Sala gravada com sucesso!");
+      this.salaService.save(this.vestibularUUID, obj).subscribe((success) => {
+          this.router.navigate([`/vestibulares/` + this.vestibularUUID + `/salas`]);
         }, (error) => {
           console.error(error);
       });
     } else {
-      alert("Vestibular inválido!");
+      alert('Vestibular inválido!');
     }
   }
 
@@ -81,13 +76,13 @@ export class SalaNewComponent implements OnInit {
   }
 
   // GETTERS DO FORMULÁRIO
-  get identificador() :FormControl {
+  get identificador(): FormControl {
     return this.salaForm.get('identificador') as FormControl;
   }
-  get bloco() :FormControl {
+  get bloco(): FormControl {
     return this.salaForm.get('bloco') as FormControl;
   }
-  get capacidade() :FormControl {
+  get capacidade(): FormControl {
     return this.salaForm.get('capacidade') as FormControl;
   }
 }

@@ -1,39 +1,36 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ISala } from 'src/app/shared/models/sala.model';
-import { environment } from 'src/environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {ISala} from 'src/app/shared/models/sala.model';
+import {Observable} from "rxjs";
+import {ISalas} from "../../shared/models/salas.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SalaService {
 
-  private readonly API_URL :string = `${environment.API_SPRING}vestibulares`;
+  private readonly API_URL: string = `/api/vestibulares`;
 
-  constructor(private http :HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
-  getAll(idVestibular :string) {
-    return this.http.get<ISala[]>( `${this.API_URL}/${idVestibular}/salas`, {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': `${environment.API_SPRING}`
-      })
-    });
+  getAll(vestibularUUID: string): Observable<ISalas> {
+    return this.http.get<ISalas>( `${this.API_URL}/${vestibularUUID}/salas`);
   }
 
-  getOne(idVestibular :string, id: string) {
-      return this.http.get<ISala>( `${this.API_URL}/${idVestibular}/salas/${id}` );
+  getOne(vestibularUUID: string, salaID: string): Observable<ISala> {
+    return this.http.get<ISala>( `${this.API_URL}/${vestibularUUID}/salas/${salaID}`);
   }
 
-  create(idVestibular :string, record: Object) {
-      return this.http.post( `${this.API_URL}/${idVestibular}/salas` , record);
+  save(vestibularUUID: string, sala: any) {
+    return this.http.post( `${this.API_URL}/${vestibularUUID}/salas` , sala);
   }
 
-  update(idVestibular :string, id: string, record: Object) {
-      return this.http.put( `${this.API_URL}/${idVestibular}/salas/${id}` , record);
+  update(vestibularUUID: string, salaID: string, sala: any) {
+    return this.http.patch( `${this.API_URL}/${vestibularUUID}/salas/${salaID}` , sala);
   }
 
-  delete(idVestibular :string, id :string) {
-      return this.http.delete( `${this.API_URL}/${idVestibular}/salas/${id}` );
+  delete(vestibularUUID: string, salaID: string): Observable<ISalas> {
+    return this.http.delete<ISalas>( `${this.API_URL}/${vestibularUUID}/salas/${salaID}` );
   }
 }
