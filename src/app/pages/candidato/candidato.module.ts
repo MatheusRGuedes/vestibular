@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from 'src/app/core/core.module';
 import { CandidatoNewComponent } from './candidato-new/candidato-new.component';
 import { CandidatoListComponent } from './candidato-list/candidato-list.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CandidatoListComponent } from './candidato-list/candidato-list.componen
     CommonModule,
     CandidatoRoutingModule,
     ReactiveFormsModule,
-    CoreModule
+    CoreModule,
+    SharedModule
   ]
 })
 export class CandidatoModule { }

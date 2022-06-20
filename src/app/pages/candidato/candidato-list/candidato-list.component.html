@@ -1,5 +1,27 @@
 <h5>Lista candidatos</h5>
 
+<a class="btn btn-primary btn-sm my-4" routerLink="/candidatos/novo">Novo Candidato</a>
+
+<form action="" class="mb-3" [formGroup]="formPesquisa">
+    <div class="d-flex">
+        <div class="col-sm-4">
+            <label for="idVestibular" class="form-label">Vestibular</label>
+            <select class="form-select" formControlName="idVestibular">
+                <option value="">Selecione...</option>
+                <option *ngFor="let obj of listaVestibulares" value="{{obj.valor}}">{{obj.descricao}}</option>
+            </select>
+
+            <div *ngIf="campoInvalido('idVestibular')" class="containerError">
+                <span>Campo obrigatório.</span>
+            </div>
+        </div>
+
+        <div class="d-flex align-self-end mx-3">
+            <button class="btn btn-primary btn-sm" (click)="pesquisar()">Pesquisar</button>
+        </div>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -15,6 +37,7 @@
             <td>{{ i+1 }}</td>
             <td>{{ obj.nome }}</td>
             <td>{{ obj.dataNascimento | date:'dd/MM/YYYY' }}</td>
+            <td>{{ obj.cpf | cpfFormat }}</td>
             <td>
                 <button class="btn btn-warning btn-sm" (click)="editar(obj)">Editar</button>
                 &nbsp;
