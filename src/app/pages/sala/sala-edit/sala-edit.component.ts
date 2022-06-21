@@ -85,7 +85,7 @@ export class SalaEditComponent implements OnInit {
         console.error(error);
       });
     } else {
-      alert('Vestibular inválido!');
+      alert('Sala inválido!');
     }
   }
 

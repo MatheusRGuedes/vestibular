@@ -1,4 +1,4 @@
 export interface ICurso {
-    id?: string;
+    cursoUUID?: string;
     nome: string;
 }

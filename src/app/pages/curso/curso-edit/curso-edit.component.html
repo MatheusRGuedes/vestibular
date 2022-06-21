@@ -2,7 +2,7 @@
 <div class="container">
 
   <nav class="navbar">
-    <h5>Novo Curso</h5>
+    <h5>Edit Curso</h5>
   </nav>
 
   <form action="" [formGroup]="cursoForm">
@@ -22,7 +22,7 @@
         <a class="btn btn-primary btn-sm" routerLink="/vestibulares/{{vestibularUUID}}/cursos"><< Voltar</a>
       </div>
       <div class="col-2 d-flex flex-row-reverse">
-        <button type="submit" class="btn btn-success btn-sm" (click)="salvar()">Salvar</button>
+        <button type="submit" class="btn btn-success btn-sm" (click)="editar()">Salvar</button>
       </div>
     </div>
   </form>

@@ -1,39 +1,37 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ICurso } from 'src/app/shared/models/curso.model';
-import { environment } from 'src/environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {ICurso} from 'src/app/shared/models/curso.model';
+import {Observable} from 'rxjs';
+import {ICursos} from '../../shared/models/cursos.module';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CursoService {
 
-  private readonly API_URL :string = `${environment.API_SPRING}vestibulares`;
+  private readonly API_URL: string = `/api/vestibulares`;
 
-  constructor(private http :HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
-  getAll(idVestibular :string) {
-    return this.http.get<ICurso[]>( `${this.API_URL}/${idVestibular}/cursos`, {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': `${environment.API_SPRING}`
-      })
-    });
+  getAll(vestibularUUID: string): Observable<ICursos> {
+    return this.http.get<ICursos>( `${this.API_URL}/${vestibularUUID}/cursos`);
   }
 
-  getOne(idVestibular :string, id: string) {
-      return this.http.get<ICurso>( `${this.API_URL}/${idVestibular}/cursos/${id}` );
+  getOne(vestibularUUID: string, cursoUUID: string): Observable<ICurso> {
+    return this.http.get<ICurso>( `${this.API_URL}/${vestibularUUID}/cursos/${cursoUUID}`);
   }
 
-  create(idVestibular :string, record: Object) {
-      return this.http.post( `${this.API_URL}/${idVestibular}/cursos` , record);
+  save(vestibularUUID: string, curso: any) {
+    return this.http.post( `${this.API_URL}/${vestibularUUID}/cursos` , curso);
   }
 
-  update(idVestibular :string, id: string, record: Object) {
-      return this.http.put( `${this.API_URL}/${idVestibular}/cursos/${id}` , record);
+  update(vestibularUUID: string, cursoUUID: string, curso: any) {
+    return this.http.patch( `${this.API_URL}/${vestibularUUID}/cursos/${cursoUUID}` , curso);
   }
 
-  delete(idVestibular :string, id :string) {
-      return this.http.delete( `${this.API_URL}/${idVestibular}/cursos/${id}` );
+  delete(vestibularUUID: string, cursoUUID: string): Observable<ICursos> {
+    return this.http.delete<ICursos>( `${this.API_URL}/${vestibularUUID}/cursos/${cursoUUID}` );
   }
+
 }

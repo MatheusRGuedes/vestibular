@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {ISala} from 'src/app/shared/models/sala.model';
 import {Observable} from "rxjs";
-import {ISalas} from "../../shared/models/salas.model";
+import {ISalas} from '../../shared/models/salas.model';
 
 @Injectable({
   providedIn: 'root'

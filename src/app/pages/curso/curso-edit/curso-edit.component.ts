@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import { CursoService } from 'src/app/core/services/curso.service';
-import { ICurso } from 'src/app/shared/models/curso.model';
+import {CursoService} from '../../../core/services/curso.service';
+import {ICurso} from '../../../shared/models/curso.model';
 
 @Component({
-  selector: 'app-curso-new',
-  templateUrl: './curso-new.component.html',
-  styleUrls: ['./curso-new.component.css']
+  selector: 'app-curso-edit',
+  templateUrl: './curso-edit.component.html',
+  styleUrls: ['./curso-edit.component.css']
 })
-export class CursoNewComponent implements OnInit {
+export class CursoEditComponent implements OnInit {
 
+  cursoUUID: string;
   vestibularUUID: string;
   cursoForm: FormGroup;
 
@@ -19,7 +20,7 @@ export class CursoNewComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private cursoService: CursoService
-    ) {
+  ) {
     this.cursoForm = fb.group({
       nome : fb.control('', Validators.required)
     });
@@ -27,6 +28,8 @@ export class CursoNewComponent implements OnInit {
 
   ngOnInit(): void {
     this.vestibularUUID = this.activatedRoute.snapshot.paramMap.get('idVestibular');
+    this.cursoUUID = this.activatedRoute.snapshot.paramMap.get('cursoUUID');
+    this.recuperarCurso();
   }
 
   campoInvalido(campo: string): boolean {
@@ -47,7 +50,17 @@ export class CursoNewComponent implements OnInit {
     });
   }
 
-  salvar() {
+  recuperarCurso() {
+    this.cursoService.getOne(this.vestibularUUID, this.cursoUUID).subscribe((response) => {
+      this.cursoForm.patchValue({
+        nome: response.nome
+      });
+    }, (error) => {
+      console.error(error);
+    });
+  }
+
+  editar() {
     if (this.vestibularUUID) {
 
       if (this.cursoForm.invalid) {
@@ -59,17 +72,14 @@ export class CursoNewComponent implements OnInit {
         nome: this.nome.value
       };
 
-      this.cursoService.save(this.vestibularUUID, obj).subscribe((success) => {
-          this.router.navigate([`/vestibulares/` + this.vestibularUUID + `/cursos`]);
-        }, (error) => {
-          console.error(error);
+      this.cursoService.update(this.vestibularUUID, this.cursoUUID, obj).subscribe((success) => {
+        this.router.navigate([`/vestibulares/` + this.vestibularUUID + `/cursos`]);
+      }, (error) => {
+        console.error(error);
       });
     } else {
-      alert('Vestibular inválido!');
+      alert('Curso inválido!');
     }
-  }
-
-  editar() {
   }
 
   // GETTERS DO FORMULÁRIO
