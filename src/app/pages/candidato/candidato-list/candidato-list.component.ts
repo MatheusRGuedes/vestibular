@@ -87,8 +87,17 @@ export class CandidatoListComponent implements OnInit {
     this.router.navigate([`vestibulares/${this.chaveVestibular}/candidatos/editar/${candidato.id}`]);
   }
 
-  excluir(id :string) {
-
+  excluir(candidato :ICandidato) {
+    if(confirm(`Deseja excluir o candidato ${candidato.nome} ?`)) {
+      const idVestibular = candidato.vestibular ? candidato.vestibular.id : null;
+      const idCurso = candidato.curso ? candidato.curso.id : null;
+      this.candidatoService.delete(idVestibular, idCurso, candidato.id)
+        .subscribe(() => {
+          alert("Candidato excluído com sucesso!");
+      }, (error) => {
+          console.error(error);
+      })
+    }
   }
 
   get idVestibular() :any {
