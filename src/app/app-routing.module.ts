@@ -17,7 +17,7 @@ const appRoutes :Routes = [
         loadChildren: () => import("./pages/curso/curso.module").then(m => m.CursoModule)
     },
     {
-        path: "candidatos",
+        path: "vestibulares/:idVestibular/candidatos",
         loadChildren: () => import("./pages/candidato/candidato.module").then(m => m.CandidatoModule)
     },
     

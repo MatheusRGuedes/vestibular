@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CandidatoService } from 'src/app/core/services/candidato.service';
 import { VestibularService } from 'src/app/core/services/vestibular.service';
 import { ICandidato } from 'src/app/shared/models/candidato.model';
@@ -15,6 +16,7 @@ export class CandidatoListComponent implements OnInit {
 
   // Variáveis
   formPesquisa :FormGroup;
+  chaveVestibular :string;
   listaVestibulares :ComboGenerica[] = [
     {valor: '1', descricao: 'teste1'},
     {valor: '2', descricao: 'teste2'}
@@ -26,6 +28,8 @@ export class CandidatoListComponent implements OnInit {
 
   constructor(
     private fb :FormBuilder,
+    private router :Router,
+    private activatedRoute :ActivatedRoute,
     private vestibularService :VestibularService,
     private candidatoService :CandidatoService
     ) {
@@ -35,7 +39,12 @@ export class CandidatoListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getChaveVestibular();
     this.recuperarVestibulares();
+  }
+
+  getChaveVestibular() {
+    this.chaveVestibular = this.activatedRoute.snapshot.paramMap.get('idVestibular');
   }
 
   campoInvalido(campo :string) :boolean {
@@ -51,6 +60,10 @@ export class CandidatoListComponent implements OnInit {
           "valor": obj.id,
           "descricao": DateService.dateToString(obj.dataInicio) +" - "+ DateService.dateToString(obj.dataInicio) 
         }))
+        
+        if (this.listaVestibulares.length === 1) {
+          this.idVestibular = this.listaVestibulares[0].valor;
+        }
       })
     }
   }
@@ -70,14 +83,18 @@ export class CandidatoListComponent implements OnInit {
   }
 
   editar(candidato :any) {
-
+    //console.log(candidato);
+    this.router.navigate([`vestibulares/${this.chaveVestibular}/candidatos/editar/${candidato.id}`]);
   }
 
   excluir(id :string) {
 
   }
 
-  get idVestibular() : FormControl {
+  get idVestibular() :any {
     return this.formPesquisa.get('idVestibular') as FormControl;
+  }
+  set idVestibular(value :any) {
+    this.formPesquisa.get('idVestibular').setValue(value);
   }
 }

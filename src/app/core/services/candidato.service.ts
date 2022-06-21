@@ -9,15 +9,18 @@ import { environment } from 'src/environments/environment';
 export class CandidatoService {
 
   private readonly API_URL :string = `${environment.API_SPRING}vestibulares`;
+  private options :{} = {};
 
-  constructor(private http :HttpClient) { }
-
-  getAll(idVestibular :string) {
-    return this.http.get<ICandidato[]>( `${this.API_URL}/${idVestibular}/candidatos`, {
+  constructor(private http :HttpClient) {
+    this.options = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin': `${environment.API_SPRING}`
       })
-    });
+    }
+  }
+
+  getAll(idVestibular :string) {
+    return this.http.get<ICandidato[]>( `${this.API_URL}/${idVestibular}/candidatos`, this.options);
   }
 
   getOne(idVestibular :string, id: string) {

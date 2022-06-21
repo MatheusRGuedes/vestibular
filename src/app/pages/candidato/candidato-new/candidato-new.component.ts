@@ -7,6 +7,7 @@ import { CandidatoService } from 'src/app/core/services/candidato.service';
 import { DateService } from 'src/app/shared/utils/date.service';
 
 import { ComboGenerica } from 'src/app/shared/models/combo-generica.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-candidato-new',
@@ -17,18 +18,21 @@ export class CandidatoNewComponent implements OnInit {
 
   // Variáveis
   candidatoForm :FormGroup;
+  urlPath :string;
+  chaveVestibular :string;
   listaVestibulares :ComboGenerica[] = [
-    //{ valor: '1', descricao: 'vest1' },
-   // { valor: '2', descricao: 'vest2' },
-   // { valor: '3', descricao: 'vest3' }
+    { valor: '1', descricao: 'vest1' },
+    { valor: '2', descricao: 'vest2' },
+    { valor: '3', descricao: 'vest3' }
   ];
   listaCursos :ComboGenerica[] = [
-  //  { valor: '1', descricao: 'curso1' },
-  //  { valor: '2', descricao: 'curso2' }
+    { valor: '1', descricao: 'curso1' },
+    { valor: '2', descricao: 'curso2' }
   ];
 
   constructor(
     private fb :FormBuilder,
+    private activatedRoute :ActivatedRoute,
     private vestibularService :VestibularService,
     private cursoService :CursoService,
     private candidatoService :CandidatoService
@@ -43,7 +47,16 @@ export class CandidatoNewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getRouteInformations();
     this.recuperarVestibulares();
+    this.recuperaCandidato();
+  }
+
+  getRouteInformations() {
+    this.activatedRoute.url.subscribe((urlSegment) => {
+      this.urlPath = urlSegment[0].path;
+    });
+    this.chaveVestibular = this.activatedRoute.snapshot.paramMap.get('idVestibular');
   }
 
   campoInvalido(campo :string) :boolean {
@@ -94,6 +107,31 @@ export class CandidatoNewComponent implements OnInit {
     }
   }
 
+  recuperaCandidato() {
+    if (this.urlPath !== 'editar') return false;
+
+    const chave = this.activatedRoute.snapshot.paramMap.get('id');
+    const idVestibular = this.activatedRoute.snapshot.paramMap.get('idVestibular');
+    if (chave && idVestibular) {
+      console.log("Recuperando Candidato para edição: ");
+
+      this.candidatoService.getOne(idVestibular, chave)
+        .subscribe((response) => {
+          console.log(response);
+          
+          this.candidatoForm.patchValue({
+            "nome": response.nome,
+            "dataNascimento": DateService.dateToString(response.dataNascimento),
+            "cpf": response.cpf,
+            "idVestibular": response.vestibular.id,
+            "idCurso": response.curso.id
+          })
+        }, (error) => {
+          console.error(error);
+        })
+    }
+  }
+
   salvar() {
     if (!this.candidatoForm.valid) {
       this.markAllAsDirty(this.candidatoForm);
@@ -107,12 +145,22 @@ export class CandidatoNewComponent implements OnInit {
       "cpf": this.cpf.value
     }
 
-    this.candidatoService.create(idVestibular, idCurso, obj)
-      .subscribe((success) => {
-        alert("Candidato criado com sucesso!");
-      }, (error) => {
-        console.log(error);
-    })
+    if (this.urlPath !== 'editar') {
+      this.candidatoService.create(idVestibular, idCurso, obj)
+        .subscribe((success) => {
+          alert("Candidato criado com sucesso!");
+        }, (error) => {
+          console.log(error);
+      })
+    } else {
+      let id = this.activatedRoute.snapshot.paramMap.get('id');
+      this.candidatoService.update(idVestibular, idCurso, id, obj)
+        .subscribe((success) => {
+          alert("Candidato atualizado com sucesso!");
+        }, (error) => {
+          console.log(error);
+      })
+    }
   }
 
 
