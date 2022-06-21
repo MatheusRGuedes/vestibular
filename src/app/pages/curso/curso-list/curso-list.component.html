@@ -22,7 +22,8 @@
 
         <button class="btn btn-danger btn-sm me-3" (click)="excluir(obj.cursoUUID)">Excluir</button>
 
-        <button class="btn btn-secondary btn-sm">Candidatos</button>
+        <button class="btn btn-secondary btn-sm"
+                routerLink="/vestibulares/{{this.vestibularUUID}}/cursos/{{obj.cursoUUID}}/candidatos">Candidatos</button>
       </td>
     </tr>
     </tbody>
