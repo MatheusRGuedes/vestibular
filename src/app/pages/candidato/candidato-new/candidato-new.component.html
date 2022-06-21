@@ -1,1 +1,48 @@
-<h1>Candidato new</h1>
+
+<div class="container">
+
+  <nav class="navbar">
+    <h5>Novo Candidato</h5>
+  </nav>
+
+  <form action="" [formGroup]="candidatoForm">
+    <div class="row mb-3">
+      <div class="col-4">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" formControlName="nome">
+
+        <div *ngIf="campoInvalido('nome')" class="containerError">
+          <span>Campo obrigatório.</span>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <label for="dataNascimento" class="form-label">Data Nascimento</label>
+        <input type="date" class="form-control" id="dataNascimento" formControlName="dataNascimento">
+
+        <div *ngIf="campoInvalido('dataNascimento')" class="containerError">
+          <span>Campo obrigatório.</span>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <label for="cpf" class="form-label">Cpf</label>
+        <input type="text" class="form-control" id="cpf" formControlName="cpf">
+
+        <div *ngIf="campoInvalido('cpf')" class="containerError">
+          <span>Campo obrigatório.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <a class="btn btn-primary btn-sm" routerLink="/vestibulares/{{vestibularUUID}}/cursos/{{cursoUUID}}/candidatos"><< Voltar</a>
+      </div>
+      <div class="col-2 d-flex flex-row-reverse">
+        <button type="submit" class="btn btn-success btn-sm" (click)="salvar()">Salvar</button>
+      </div>
+    </div>
+  </form>
+
+</div>

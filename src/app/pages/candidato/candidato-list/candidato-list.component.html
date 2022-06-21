@@ -1,1 +1,41 @@
-<h1>Candidato list</h1>
+
+<div class="container">
+
+  <nav class="navbar">
+    <h5>Candidatos</h5>
+    <a class="btn btn-success btn-sm my-4"
+       routerLink="/vestibulares/{{this.vestibularUUID}}/cursos/{{this.cursoUUID}}/candidatos/novo">Novo Candidato</a>
+  </nav>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">nome</th>
+      <th scope="col">data nascimento</th>
+      <th scope="col">cpf</th>
+      <th scope="col">vestibular</th>
+      <th scope="col">curso</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let obj of candidatos; let i = index">
+      <td>{{ i+1 }}</td>
+      <td>{{ obj.nome }}</td>
+      <td>{{ obj.dataNascimento | date:'dd/MM/YYYY' }}</td>
+      <td>{{ obj.cpf }}</td>
+      <td>{{ obj.vestibular.vestibularUUID }}</td>
+      <td>{{ obj.curso.nome }}</td>
+      <td>
+        <button class="btn btn-warning btn-sm me-3" (click)="editar(obj)">Editar</button>
+
+        <button class="btn btn-danger btn-sm me-3" (click)="excluir(obj)">Excluir</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <nav class="navbar">
+    <a class="btn btn-primary btn-sm my-4" routerLink="/vestibulares/{{this.vestibularUUID}}/cursos"><< Voltar</a>
+  </nav>
+</div>

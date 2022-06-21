@@ -6,7 +6,7 @@ import {CandidatoEditComponent} from './candidato-edit/candidato-edit.component'
 
 const routes: Routes = [
   { path: 'novo', component: CandidatoNewComponent },
-  { path: 'edit', component: CandidatoEditComponent },
+  { path: 'edit/:candidatoID', component: CandidatoEditComponent },
   { path: '', component: CandidatoListComponent }
 ];
 
