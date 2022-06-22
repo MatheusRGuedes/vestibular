@@ -9,19 +9,21 @@ import { CoreModule } from 'src/app/core/core.module';
 import { VestibularNewComponent } from './vestibular-new/vestibular-new.component';
 import { VestibularListComponent } from './vestibular-list/vestibular-list.component';
 import { VestibularEditComponent } from './vestibular-edit/vestibular-edit.component';
+import {VestibularAtribuirComponent} from "./vestibular-atribuir/vestibular-atribuir.component";
 
 @NgModule({
   declarations: [
     VestibularNewComponent,
     VestibularListComponent,
-    VestibularEditComponent
+    VestibularEditComponent,
+    VestibularAtribuirComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     VestibularRoutingModule,
     CoreModule
-  ], 
+  ],
   exports: [
     VestibularNewComponent
   ]

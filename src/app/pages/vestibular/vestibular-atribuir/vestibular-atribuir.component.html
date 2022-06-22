@@ -1,0 +1,31 @@
+
+<div class="container">
+
+  <nav class="navbar">
+    <h5>Atribuir Candidatos </h5>
+  </nav>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Nome</th>
+      <th scope="col">CPF</th>
+      <th scope="col">Curso</th>
+      <th scope="col">Sala</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let obj of candidatos; let i = index">
+      <td>{{ i+1 }}</td>
+      <td>{{ obj.nome }}</td>
+      <td>{{ obj.cpf }}</td>
+      <td>{{ obj.curso.nome }}</td>
+      <td>{{ retornarIdentificador(obj.sala) }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <nav class="navbar">
+    <a class="btn btn-primary btn-sm my-4" routerLink="/vestibulares"><< Voltar</a>
+  </nav>
+</div>
