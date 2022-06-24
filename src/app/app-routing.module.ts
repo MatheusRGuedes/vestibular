@@ -16,9 +16,12 @@ const appRoutes: Routes = [
         loadChildren: () => import('./pages/curso/curso.module').then(m => m.CursoModule)
     },
     {
-      path: 'vestibulares/:idVestibular/cursos/:cursoUUID/candidatos',
-      loadChildren: () => import('./pages/candidato/candidato.module').then(m => m.CandidatoModule)
+        path: "vestibulares/:idVestibular/candidatos",
+        loadChildren: () => import("./pages/candidato/candidato.module").then(m => m.CandidatoModule)
     },
+    
+    //{ path: '/cursos',  }
+
     { path: '', component: VestibularListComponent },
     { path: '**', component: VestibularListComponent }
 ];

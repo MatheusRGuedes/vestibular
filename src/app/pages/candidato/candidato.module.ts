@@ -6,6 +6,7 @@ import {CandidatoRoutingModule} from './candidato-routing.module';
 import {CandidatoNewComponent} from './candidato-new/candidato-new.component';
 import {CandidatoEditComponent} from './candidato-edit/candidato-edit.component';
 import {CandidatoListComponent} from './candidato-list/candidato-list.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {CandidatoListComponent} from './candidato-list/candidato-list.component'
     CommonModule,
     CandidatoRoutingModule,
     ReactiveFormsModule,
-    CoreModule
+    CoreModule,
+    SharedModule
   ]
 })
 export class CandidatoModule { }
